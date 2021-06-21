@@ -3,8 +3,13 @@ import React from 'react';
 const CurrencyRow = (props) => {
 
     const {currencyOptions, selectCurrency, onChangeCurrency, onChangeAmount, amount, currencySymbols, select} = props;
-
-    const optionValue = currencyOptions.map((option, index) => (
+    
+    //remove undefined values
+    const currencyName = currencyOptions.filter(value =>{
+        return currencySymbols[value] !== undefined
+    })
+    
+    const optionValue = currencyName.map((option, index) => (
         <option key={index} value={option}>{`${currencySymbols[option]} (${option})`}</option>
     ));
 
