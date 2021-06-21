@@ -4,7 +4,9 @@ import CurrencyRow from './CurrencyRow';
 import Graph from './Graph';
 
   let date = new Date();
+  //set end date format for api 
   let currentDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000 )).toISOString().split("T")[0];
+  //set start date format for api
   let startDate = new Date(date.setMonth(date.getMonth()-12)- (date.getTimezoneOffset() * 60000 )).toISOString().split("T")[0];
   
   
@@ -114,7 +116,10 @@ function App() {
         onChangeAmount={handleToAmountChange}
         amount={toAmount}
       />
-      <Graph dataRates={histRates} toCurrency={toCurrency}/>
+      <Graph 
+        dataRates={histRates} 
+        toCurrency={toCurrency}
+      />
     </div>
     
     </>

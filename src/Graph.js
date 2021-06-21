@@ -10,11 +10,10 @@ const Graph = ({dataRates, toCurrency}) => {
     const data = [];
     
     const values = Object.entries(dataRates);
-    // console.log(values)
     values.map((value) => {
         let d = {
-            day: value.[0],
-            value: value.[1].[toCurrency],
+            day: value[0],
+            value: value[1][toCurrency],
         }
         return data.push(d)
     })
