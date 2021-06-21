@@ -14,9 +14,9 @@ const Graph = ({dataRates, toCurrency}) => {
     values.map((value) => {
         let d = {
             day: value.[0],
-            value: value.[1].[toCurrency]
+            value: value.[1].[toCurrency],
         }
-        data.push(d)
+        return data.push(d)
     })
     
     return ( 
