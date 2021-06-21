@@ -4,11 +4,6 @@ import CurrencyRow from './CurrencyRow';
 
   let currentDate = new Date().toLocaleDateString();
 
-
-const API = 'http://api.exchangeratesapi.io/v1/latest?access_key=10b30a08b12abdf7a71f042bfffa368c';
-const API_SYMBOLS = 'http://api.exchangeratesapi.io/v1/symbols?access_key=10b30a08b12abdf7a71f042bfffa368c';
-
-
 function App() {
   const [currencyOptions, setCurrencyOptions] = useState([]);
   const [fromCurrency, setFromCurrency] = useState();
@@ -18,6 +13,9 @@ function App() {
   const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
   const [currencySymbols, setCurrencySymbols] = useState([]);
  
+  const API = `https://api.exchangerate.host/latest?base=${fromCurrency}`;
+  const API_SYMBOLS = 'http://api.exchangeratesapi.io/v1/symbols?access_key=10b30a08b12abdf7a71f042bfffa368c';
+
   let toAmount, fromAmount;
   if (amountInFromCurrency) {
     fromAmount = amount;
@@ -36,8 +34,9 @@ function App() {
       setFromCurrency(data.base)
       setToCurrency(firstCurrency)
       setExchangeRate(data.rates[firstCurrency])
+      // console.log(data)
     })
-  }, [])
+  }, [])// eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     
@@ -48,7 +47,7 @@ function App() {
           setExchangeRate(data.rates[toCurrency])
       })
     }
-  },[fromCurrency, toCurrency])
+  },[fromCurrency, toCurrency])// eslint-disable-line react-hooks/exhaustive-deps
   
 
   useEffect(() => {
@@ -87,7 +86,7 @@ function App() {
         selectCurrency={fromCurrency}
         currencySymbols={currencySymbols}
         select="disable"
-        // onChangeCurrency={e => setFromCurrency(e.target.value)}
+        onChangeCurrency={e => setFromCurrency(e.target.value)}
         onChangeAmount={handleFromAmountChange}
         amount={fromAmount}
       />
