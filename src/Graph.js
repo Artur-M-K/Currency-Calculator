@@ -23,7 +23,7 @@ const Graph = ({dataRates, toCurrency}) => {
         <div style={styles}>
         <LineChart
           width={900}
-          height={300}
+          height={310}
           data={data}
           margin={{ top: 10, right: 0, bottom: 10, left: 0 }}
         >
