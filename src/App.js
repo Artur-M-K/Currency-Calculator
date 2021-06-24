@@ -45,9 +45,6 @@ function App() {
       setFromCurrency(data.base)
       setToCurrency(firstCurrency)
       setExchangeRate(data.rates[firstCurrency])
-      let rates = Object.entries(data.rates);
-      const currencies = [rates[28], rates[46], rates[150], rates[49],rates[73], rates[116]]
-      setTopCurrencies(currencies);
     })
   }, [])// eslint-disable-line react-hooks/exhaustive-deps
 
@@ -58,6 +55,9 @@ function App() {
       .then(res => res.json())
       .then(data => {
           setExchangeRate(data.rates[toCurrency])
+          let rates = Object.entries(data.rates);
+          const currencies = [rates[28], rates[46], rates[150], rates[49],rates[73], rates[116]]
+          setTopCurrencies(currencies);
       })
     }
   },[fromCurrency, toCurrency])// eslint-disable-line react-hooks/exhaustive-deps
@@ -75,7 +75,6 @@ function App() {
     .then(res => res.json())
     .then(data => {
       setCurrencySymbols(data.symbols)
-      
     })
   },[])
 
@@ -127,7 +126,6 @@ function App() {
         toCurrency={toCurrency}
       />
       <CurrencyTop 
-        currency={currencyOptions}
         fromCurrency={fromCurrency}
         rate={topCurrencies}
         />
