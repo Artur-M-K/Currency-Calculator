@@ -21,6 +21,7 @@ To run this project, install it locally using npm:
 
 ```
 $ git clone https://github.com/Artur-M-K/Currency-Calculator.git
+$ cd Currency-Calculator
 $ npm install
 $ npm start
 ```
