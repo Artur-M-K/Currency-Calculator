@@ -9,8 +9,8 @@ const CurrencyRow = (props) => {
         return currencySymbols[value] !== undefined
     })
     
-    const optionValue = currencyName.map((option, index) => (
-        <option key={index} value={option}>{`${currencySymbols[option]} (${option})`}</option>
+    const optionValue = currencyName.map(option => (
+        <option key={option.id} value={option}>{`${currencySymbols[option]} (${option})`}</option>
     ));
 
     return ( 
