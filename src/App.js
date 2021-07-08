@@ -2,12 +2,14 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import CurrencyRow from './CurrencyRow';
 import Graph from './Graph';
+import CurrencyTop from './CurrencyTop';
 
   let date = new Date();
   //set end date format for api 
   let currentDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000 )).toISOString().split("T")[0];
   //set start date format for api
   let startDate = new Date(date.setMonth(date.getMonth()-12)- (date.getTimezoneOffset() * 60000 )).toISOString().split("T")[0];
+
   
   
 function App() {
@@ -19,6 +21,7 @@ function App() {
   const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
   const [currencySymbols, setCurrencySymbols] = useState([]);
   const [histRates, setHistRates] = useState([]);
+  const [topCurrencies, setTopCurrencies] = useState([]);
  
   const API = `https://api.exchangerate.host/latest?base=${fromCurrency}`;
   const API_DATE = `https://api.exchangerate.host/timeseries?base=${fromCurrency}&start_date=${startDate}&end_date=${currentDate}`
@@ -52,6 +55,9 @@ function App() {
       .then(res => res.json())
       .then(data => {
           setExchangeRate(data.rates[toCurrency])
+          let rates = Object.entries(data.rates);
+          const currencies = [rates[28], rates[46], rates[150], rates[49],rates[73], rates[116]]
+          setTopCurrencies(currencies);
       })
     }
   },[fromCurrency, toCurrency])// eslint-disable-line react-hooks/exhaustive-deps
@@ -69,7 +75,6 @@ function App() {
     .then(res => res.json())
     .then(data => {
       setCurrencySymbols(data.symbols)
-      
     })
   },[])
 
@@ -120,6 +125,10 @@ function App() {
         dataRates={histRates} 
         toCurrency={toCurrency}
       />
+      <CurrencyTop 
+        fromCurrency={fromCurrency}
+        rate={topCurrencies}
+        />
     </div>
     
     </>

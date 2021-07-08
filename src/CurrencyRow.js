@@ -1,4 +1,5 @@
 import React from 'react';
+import uuid from 'react-uuid'
 
 const CurrencyRow = (props) => {
 
@@ -10,7 +11,9 @@ const CurrencyRow = (props) => {
     })
     
     const optionValue = currencyName.map(option => (
-        <option key={option.id} value={option}>{`${currencySymbols[option]} (${option})`}</option>
+        <React.Fragment key={uuid()}>
+        <option key={uuid()} value={option}>{`${currencySymbols[option]} (${option})`}</option>
+        </React.Fragment>
     ));
 
     return ( 
