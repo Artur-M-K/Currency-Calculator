@@ -3,6 +3,8 @@
 ## Info
 This calculator allows you to convert the currency at the current rate from 164 currencies from around the world. It also presents the annual rate chart of the selected currency, and the rate in relation to the top five currencies.
 
+![currency1](https://user-images.githubusercontent.com/80982136/128222905-c4f1437c-c999-46e8-ab05-24426834204e.gif)
+
 ## Technologies
 Project is created with:
 * React
