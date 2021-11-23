@@ -3,6 +3,7 @@ import './App.css';
 import CurrencyRow from './CurrencyRow';
 import Graph from './Graph';
 import CurrencyTop from './CurrencyTop';
+import symbols from './symbols.json';
 
   let date = new Date();
   //set end date format for api 
@@ -10,23 +11,21 @@ import CurrencyTop from './CurrencyTop';
   //set start date format for api
   let startDate = new Date(date.setMonth(date.getMonth()-12)- (date.getTimezoneOffset() * 60000 )).toISOString().split("T")[0];
 
-  
-  
 function App() {
+  
   const [currencyOptions, setCurrencyOptions] = useState([]);
   const [fromCurrency, setFromCurrency] = useState();
   const [toCurrency, setToCurrency] = useState();
   const [exchangeRate, setExchangeRate] = useState(1);
   const [amount, setAmount] = useState(1);
   const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
-  const [currencySymbols, setCurrencySymbols] = useState([]);
   const [histRates, setHistRates] = useState([]);
   const [topCurrencies, setTopCurrencies] = useState([]);
  
   const API = `https://api.exchangerate.host/latest?base=${fromCurrency}`;
   const API_DATE = `https://api.exchangerate.host/timeseries?base=${fromCurrency}&start_date=${startDate}&end_date=${currentDate}`
-  const API_SYMBOLS = 'http://api.exchangeratesapi.io/v1/symbols?access_key=10b30a08b12abdf7a71f042bfffa368c';
-
+  const API_SYMBOLS = symbols.symbols;
+ 
   let toAmount, fromAmount;
   if (amountInFromCurrency) {
     fromAmount = amount;
@@ -46,7 +45,7 @@ function App() {
       setToCurrency(firstCurrency)
       setExchangeRate(data.rates[firstCurrency])
     })
-  }, [])// eslint-disable-line react-hooks/exhaustive-deps
+  }, [API])
 
   useEffect(() => {
     
@@ -60,7 +59,7 @@ function App() {
           setTopCurrencies(currencies);
       })
     }
-  },[fromCurrency, toCurrency])// eslint-disable-line react-hooks/exhaustive-deps
+  },[fromCurrency, toCurrency, API])
   
   useEffect(() =>{
     fetch(API_DATE)
@@ -68,15 +67,7 @@ function App() {
     .then(data =>{
       setHistRates(data.rates)
     })
-  },[fromCurrency])// eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    fetch(API_SYMBOLS)
-    .then(res => res.json())
-    .then(data => {
-      setCurrencySymbols(data.symbols)
-    })
-  },[])
+  },[fromCurrency, API_DATE])
 
   function handleFromAmountChange(e) {
     
@@ -95,7 +86,7 @@ function App() {
     }else return changeRate = 1;
     
   }
-
+  
   return (
     <>
     <div className="container">
@@ -105,7 +96,7 @@ function App() {
       <CurrencyRow 
         currencyOptions={currencyOptions}
         selectCurrency={fromCurrency}
-        currencySymbols={currencySymbols}
+        currencySymbols={API_SYMBOLS}
         select="disable"
         onChangeCurrency={e => setFromCurrency(e.target.value)}
         onChangeAmount={handleFromAmountChange}
@@ -115,7 +106,7 @@ function App() {
       <CurrencyRow 
         currencyOptions={currencyOptions}
         selectCurrency={toCurrency}
-        currencySymbols={currencySymbols}
+        currencySymbols={API_SYMBOLS}
         select="enable"
         onChangeCurrency={e => setToCurrency(e.target.value)}
         onChangeAmount={handleToAmountChange}
