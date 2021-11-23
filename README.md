@@ -1,5 +1,8 @@
 ## Currency Calculator
 
+## Live
+[Currency Calculator](https://currency-calc-app.netlify.app/)
+
 ## Info
 This calculator allows you to convert the currency at the current rate from 164 currencies from around the world. It also presents the annual rate chart of the selected currency, and the rate in relation to the top five currencies.
 
