@@ -13,8 +13,8 @@ Project is created with:
 
 #### - [exchangerate.host](https://exchangerate.host/#/)
 Exchange rates API is a simple and lightweight free service for current and historical foreign exchange rates & crypto exchange rates. 
-#### - [exchangeratesapi.io](https://exchangeratesapi.io/)
-For currencies names and symbols.
+<!-- #### - [exchangeratesapi.io](https://exchangeratesapi.io/) -->
+<!-- For currencies names and symbols. -->
 #### - [recharts.org](https://recharts.org/)
 A composable charting library built on React components.
 	
